@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云剪切板</title>
+    <style>
+        textarea {
+            position: fixed;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            padding: 5% 10%;
+            font-size: 30px;
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            resize: none;
+            margin: 0;
+            font-family: Consolas;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        .msg {
+            position: fixed;
+            top: 10px;
+            right: 5%;
+            color: #aaaaaa;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea autofocus spellcheck="false" autocomplete="off"></textarea>
+    <div class="msg">
+        保存成功
+    </div>
+    <script>
+        const textarea = document.querySelector('textarea')
+        const msgEle = document.querySelector('.msg')
+        const saveXhr = new XMLHttpRequest()
+        let timerId
+        textarea.addEventListener('input', () => {
+            msgEle.style.display = 'none'
+            clearTimeout(timerId)
+            timerId = setTimeout(() => {
+                save()
+            }, 800)
+        })
+        load()
+        function save() {
+            msgEle.style.display = 'block'
+            const formData = new FormData()
+            let text = textarea.value
+            formData.append('text', text)
+            formData.append('id', '{{ id }}')
+            saveXhr.abort()
+            saveXhr.open('POST', '/save')
+            saveXhr.send(formData)
+        }
+        function load() {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', '/get?id={{ id }}', false)
+            xhr.send()
+            const data = JSON.parse(xhr.responseText)
+            if (data.success == true) {
+                let text = data.text
+                textarea.value = text
+            }
+        }
+    </script>
+</body>
+
+</html>
