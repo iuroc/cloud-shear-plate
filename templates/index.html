@@ -21,11 +21,13 @@
             display: block;
             resize: none;
             margin: 0;
-            font-family: Consolas;
+            font-family: 仓耳渔阳体;
             word-wrap: break-word;
             word-break: break-all;
             background-color: rgb(28, 28, 28);
             color: white;
+            line-height: 1.6;
+            letter-spacing: 2px;
         }
 
         .msg {
@@ -34,6 +36,22 @@
             right: 5%;
             color: #aaaaaa;
             display: none;
+        }
+
+        *::selection {
+            --bg: rgba(88, 86, 213, 0.28) !important;
+            background: var(--bg);
+            color: inherit;
+        }
+
+        *::-moz-selection {
+            background: var(--bg);
+            color: inherit;
+        }
+
+        *::-webkit-selection {
+            background: var(--bg);
+            color: inherit;
         }
     </style>
 </head>
@@ -55,6 +73,7 @@
                 save()
             }, 800)
         })
+        textarea.ondragstart = () => false
         load()
         function save() {
             msgEle.style.display = 'block'

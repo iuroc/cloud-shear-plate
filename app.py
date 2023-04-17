@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 import sqlite3
 from datetime import datetime
 import random
@@ -20,6 +20,9 @@ def init_db():
 
 
 def get_new_id():
+    cookie_id = request.cookies.get('id')
+    if cookie_id:
+        return cookie_id
     conn, cursor = init_db()
     id_len = 6
     _id = random.randint(10 ** (id_len - 1), 10**id_len - 1)
@@ -35,7 +38,9 @@ def index():
     if not _id:
         _id = get_new_id()
         return redirect(f'/?id={_id}')
-    return render_template('index.html', id=_id)
+    resp = make_response(render_template('index.html', id=_id))
+    resp.set_cookie('id', _id, max_age=10 * 365 * 24 * 60 * 60)
+    return resp
 
 
 @app.route('/save', methods=['POST'])
