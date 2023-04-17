@@ -20,6 +20,8 @@
     ```
     git clone https://github.com/oyps/cloud-shear-plate
     docker build -t cloud-shear-plate cloud-shear-plate
-    docker run -p 3005:5000 cloud-shear-plate
+    docker run -p 5000:5000 cloud-shear-plate
     rm -rf cloud-shear-plate
     ```
+
+部署成功后，可以通过 5000 端口进行访问。
