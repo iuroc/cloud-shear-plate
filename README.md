@@ -20,7 +20,7 @@
     ```
     git clone https://github.com/oyps/cloud-shear-plate
     docker build -t cloud-shear-plate cloud-shear-plate
-    docker run -p 5000:5000 cloud-shear-plate
+    docker run -p 5000:5000 -d cloud-shear-plate
     rm -rf cloud-shear-plate
     ```
 
