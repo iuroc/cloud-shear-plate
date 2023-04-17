@@ -72,4 +72,5 @@ def get():
     return {'text': result[0], 'update_at': result[1], 'id': result[2], 'success': True}
 
 
-app.run('0.0.0.0')
+if __name__ == "__main__":
+    app.run('0.0.0.0')
