@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 
 def init_db():
+    '''初始化数据库连接'''
     conn = sqlite3.connect('data.db')
     cursor = conn.cursor()
     cursor.execute(
@@ -20,6 +21,7 @@ def init_db():
 
 
 def get_new_id():
+    '''生成新的 ID，或从 Cookie 获取'''
     cookie_id = request.cookies.get('id')
     if cookie_id:
         return cookie_id
