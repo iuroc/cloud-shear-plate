@@ -21,4 +21,5 @@
     git clone https://github.com/oyps/cloud-shear-plate
     docker build -t cloud-shear-plate cloud-shear-plate
     docker run -p 3005:5000 cloud-shear-plate
+    rm -rf cloud-shear-plate
     ```
