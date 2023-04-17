@@ -10,7 +10,7 @@
 - 普通方式
 
     ```bash
-    git clone 
+    git clone https://github.com/oyps/cloud-shear-plate
     pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
     pip install flask
     flask run --host=0.0.0.0
@@ -18,5 +18,7 @@
 - Docker 方式
 
     ```
-    
+    git clone https://github.com/oyps/cloud-shear-plate
+    docker build -t cloud-shear-plate cloud-shear-plate
+    docker run -p 3005:5000 cloud-shear-plate
     ```
